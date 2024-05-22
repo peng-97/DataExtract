@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.shape.mapper.sourceor.sourceorMapper">
+    <select id="getDatset" resultType="Map">
+        select * from ${tableName}
+    </select>
+
+    <select id="getzdData" resultType="Map">
+        select t.*,p.xzbz,p.yzbz,p.sxh from SJGX_ZDJBXX t,SJGX_ZDJBXX_JZD p where t.bsm=p.bsm and  p.xzbz IS NOT NULL and p.yzbz IS NOT NULL and p.sxh is not null order by p.sxh
+    </select>
+
+    <select id="getxqData" resultType="Map">
+        select t.*,p.xzbz,p.yzbz from SJGX_ZRZ t,SJGX_ZRZ_JZD p where t.bsm=p.bsm and t.ldzl not like '%号%' and  t.ldzl not like '%栋' and t.ldzl not like '%幢' and t.ldzl not like '%楼'  and  p.xzbz IS NOT NULL and p.yzbz IS NOT NULL and t.xqmc is not null
+    </select>
+
+    <select id="getlpData" resultType="Map">
+        select t.*,p.xzbz,p.yzbz from SJGX_ZRZ t,SJGX_ZRZ_JZD p where t.bsm=p.bsm and (t.ldzl like '%号%' or t.ldzl like '%栋' or t.ldzl like '%幢' or  t.ldzl like '%楼') and p.xzbz IS NOT NULL and  p.yzbz IS NOT NULL
+    </select>
+
+    <select id="getfwplData" resultType="Map">
+        select p.*,t.uuid,s.xzbz,s.yzbz,t.hh from sjgx_h t, SJGX_ZRZ p,SJGX_ZRZ_JZD s where t.zrzbsm=p.bsm and t.zrzbsm=s.bsm and p.xqmc is not null
+    </select>
+
+    <select id="getFloorData" resultType="Map">
+        select * from sjgx_h
+    </select>
+
+    <select id="testse" resultType="Map">
+        select * from bh_layer
+    </select>
+
+    <select id="getsource" resultType="Map">
+         ${sql}
+    </select>
+
+    <select id="getTableCount" resultType="String">
+        select count(1) from ${tableName}
+    </select>
+
+    <select id="getFloorDataPage"  resultType="Map">
+        SELECT *
+        FROM ( SELECT t.*,
+        ROW_NUMBER() OVER (ORDER BY uuid) rn
+        FROM sjgx_h t )
+        WHERE rn BETWEEN ${start} AND ${end}
+    </select>
+
+</mapper>

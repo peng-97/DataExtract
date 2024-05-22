@@ -1,0 +1,91 @@
+spring:
+  devtool:
+    livereload:
+      enabled : true
+  mvc:
+    async:
+      request-timeout: 20000
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+
+#    dcidms:
+#      driver-class-name: org.postgresql.Driver
+#      url: jdbc:postgresql://localhost:5432/dcidms
+#      username: postgres
+#      password: postgres
+#    sourceor:
+#      driver-class-name: oracle.jdbc.OracleDriver
+#      url: jdbc:oracle:thin:@//19.200.42.75:1521/gxdb
+#      username: GXzhanshi
+#      password: xxzx123
+    dcidms:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://172.23.1.13:5432/dcidms
+      username: postgres
+      password: CDchinadci@2020
+    sourceor:
+      driver-class-name: oracle.jdbc.OracleDriver
+      url: jdbc:oracle:thin:@//172.23.20.82:1521/orcl
+      username: CDBDC_ZGJ
+      password: cdbdc@zgj
+    sourcetop:
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      url: jdbc:sqlserver://172.23.80.250:1433;databaseName=dcbdcbzb2;
+      username: changde
+      password: changde
+
+  freemarker:
+    check-template-location: false
+  execute:
+    corn: 0 0 1 ? * 7
+
+  #上传文件限制
+  servlet:
+    multipart:
+      max-file-size: 5000MB
+      max-request-size: 5000MB
+server:
+  #  address: /*
+
+  port: 8084
+  servlet:
+    context-path: /DataExtract
+  address:
+  tomcat:
+    accept-count: 10
+
+
+
+mybatis:
+  #  mapper-locations: classpath*:com/example/shape/mapper/**/*.xml
+  #  type-aliases-package: com.example.shape.entity
+  #需要每个数据源都单独配置一次
+ dcidmsconfiguration:
+    call-setters-on-nulls: true
+    map-underscore-to-camel-case: true
+ sourceorconfiguration:
+    call-setters-on-nulls: true
+    map-underscore-to-camel-case: true
+ sourcetopconfiguration:
+   call-setters-on-nulls: true
+   map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      dahaiwuliang:
+        cache:
+          mapper: debug
+      example:
+        shape: debug
+
+
+swagger:
+  basic:
+    enable: true
+    username: dci
+    password: Chinadci@123
+
+
+

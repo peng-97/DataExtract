@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.shape.mapper.dcidms.dcidmsMapper">
+    <select id="selectRes" resultType="Map" parameterType="String">
+        SELECT * FROM ${tableName}
+    </select>
+    <insert id="insertData" >
+         insert into ${tableName}  (${columns})  values  ${values}  ON CONFLICT DO NOTHING;
+    </insert>
+
+    <delete id="deleteFloorData">
+        delete from sjgx_h_floor
+    </delete>
+
+    <select id="getsource" resultType="Map">
+        ${sql}
+    </select>
+</mapper>
